@@ -1,4 +1,4 @@
-<p>catalog works!</p>
+<p>CATALOG WORKS!</p>
 <h3>Exercise 14: Product Catalog</h3>
 
 <table border="1" style="border-collapse: collapse; width: 100%;">
@@ -18,7 +18,7 @@
       <tr *ngFor="let p of cat.Products">
         <td>{{ p.ProductId }}</td>
         <td>{{ p.ProductName }}</td>
-        <td>{{ p.Price }}</td>
+        <td>{{ p.Price | currency:'VND' }}</td>
         <td><img [src]="p.Image" width="50" alt="img"></td>
       </tr>
     </ng-container>
