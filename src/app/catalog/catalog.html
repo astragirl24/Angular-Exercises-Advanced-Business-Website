@@ -1,0 +1,26 @@
+<p>catalog works!</p>
+<h3>Exercise 14: Product Catalog</h3>
+
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <thead>
+    <tr style="background-color: #f0f0f0;">
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Image</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let cat of categories">
+      <tr style="background-color: #d1ecf1;">
+        <td colspan="4"><strong>{{ cat.CateName }}</strong></td>
+      </tr>
+      <tr *ngFor="let p of cat.Products">
+        <td>{{ p.ProductId }}</td>
+        <td>{{ p.ProductName }}</td>
+        <td>{{ p.Price }}</td>
+        <td><img [src]="p.Image" width="50" alt="img"></td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>

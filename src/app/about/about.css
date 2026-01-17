@@ -1,0 +1,85 @@
+/* --- Cấu trúc chung --- */
+:host {
+    display: block;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 20px;
+    background-color: #c28fb1;
+}
+
+/* --- Tiêu đề "About Works!" --- */
+p {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+p::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 4px;
+    background: #3498db; /* Màu xanh dương chủ đạo */
+    margin: 8px auto 0;
+    border-radius: 2px;
+}
+
+/* --- Bảng hiển thị thông tin --- */
+table {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    background: #fff;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+/* Dòng trong bảng */
+tr {
+    border-bottom: 1px solid #eee;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* --- Các ô (Cells) --- */
+td {
+    padding: 16px 20px;
+    vertical-align: middle;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* Cột 1: Nhãn (ID, Name, Class...) */
+td:first-child {
+    width: 30%;
+    background-color: #f4f6f7;
+    font-weight: 600;
+    color: #34495e;
+    border-right: 1px solid #eee;
+}
+
+/* Cột 2: Giá trị dữ liệu */
+td:nth-child(2) {
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+/* --- Logo trường --- */
+img {
+    display: block;
+    max-width: 150px;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    padding: 5px;
+    background: white;
+}
