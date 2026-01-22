@@ -1,0 +1,35 @@
+<div class="container" style="padding: 20px;">
+    <h2 style="color: darkblue;">Exercise 18: Customer Groups (Http Service)</h2>
+
+    <table border="1" style="width: 100%; border-collapse: collapse;">
+        <thead style="background-color: #eee;">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+
+        <tbody *ngFor="let group of customers">
+            
+            <tr style="background-color: #d1ecf1;">
+                <td colspan="5" style="font-weight: bold; padding: 10px;">
+                    {{ group.CustomterTypeName }} (ID: {{ group.CustomerTypeId }})
+                </td>
+            </tr>
+
+            <tr *ngFor="let cus of group.Customers">
+                <td>{{ cus.Id }}</td>
+                <td>{{ cus.Name }}</td>
+                <td>{{ cus.Email }}</td>
+                <td>{{ cus.Age }}</td>
+                <td style="text-align: center;">
+                    <img [src]="cus.Image" alt="Avatar" width="60" height="60" style="object-fit: cover; border-radius: 50%;">
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

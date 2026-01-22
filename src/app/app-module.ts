@@ -11,6 +11,7 @@ import { ListProduct } from './list-product/list-product';
 import { ProductDetail } from './product-detail/product-detail';
 import { ProductServiceEvent } from './product-service.event/product-service.event';
 import { ProductServiceDetail } from './product-service.detail/product-service.detail';
+import { CustomerHttpGroup } from './customer-http-group/customer-http-group';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ProductServiceDetail } from './product-service.detail/product-service.d
     ProductDetail,
     ProductServiceEvent,
     ProductServiceDetail,
+    CustomerHttpGroup,
   ],
   imports: [
     BrowserModule,
