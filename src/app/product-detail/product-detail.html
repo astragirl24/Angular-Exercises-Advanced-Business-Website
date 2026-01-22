@@ -1,0 +1,15 @@
+<table border="1">
+    <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Image</th>
+    </tr>
+    <tr *ngIf="product_selected">
+        <td>{{ product_selected.ProductId }}</td>
+        <td>{{ product_selected.ProductName }}</td>
+        <td>{{ product_selected.Price | currency:'VND' }}</td>
+        <td><img [src]="product_selected.Image" width="100" alt="img"></td>
+    </tr>
+</table>
+<button (click)="go_back()">Back to Product List</button>

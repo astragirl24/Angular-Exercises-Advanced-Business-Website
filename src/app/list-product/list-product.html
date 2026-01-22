@@ -1,0 +1,21 @@
+<div class="product-container">
+    <h2 class="title">Danh sách sản phẩm</h2>
+    
+    <div class="grid">
+        <div class="card" *ngFor="let p of products">
+            
+            <div class="card-img">
+                <img [src]="p.Image" [alt]="p.ProductName">
+            </div>
+
+            <div class="card-body">
+                <h3>{{ p.ProductName }}</h3>
+                
+                <p class="price">{{ p.Price | number }} đ</p>
+                
+                <button (click)="view_detail(p.ProductId)">Chi tiết</button>
+            </div>
+
+        </div>
+    </div>
+</div>

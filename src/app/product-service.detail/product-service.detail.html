@@ -1,0 +1,7 @@
+
+<div style="padding: 20px;" *ngIf="selected_product">
+    <h3>Chi tiết sản phẩm: {{selected_product.ProductName}}</h3>
+    <img [src]="selected_product.Image" width="200">
+    <p>Giá: {{selected_product.Price| currency:'VND'}}</p>
+    <button (click)="go_back()">Quay lại</button>
+</div>

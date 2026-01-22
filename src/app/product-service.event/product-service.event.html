@@ -1,0 +1,25 @@
+<div style="padding: 20px;">
+    <h3>Danh sách sản phẩm</h3>
+    <table border="1" cellpadding="10" style="border-collapse: collapse;">
+        <thead style="background-color: #99deec;">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>#</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of products">
+                <td>{{p.ProductId}}</td>
+                <td>{{p.ProductName}}</td>
+                <td>{{p.Price| currency:'VND'}}</td>
+                <td>
+                    <img [src]="p.Image" width="80" (click)="view_detail(p)" style="cursor: pointer;">
+                </td>
+                <td>
+                    <button (click)="view_detail(p)">Chi tiết</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
