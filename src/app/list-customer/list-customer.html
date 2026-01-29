@@ -1,20 +1,28 @@
-<p>list-customer works!</p>
-<table>
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Age</th>
-      <th>Picture</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let customer of customers">
-      <td>{{ customer.id }}</td>
-      <td>{{ customer.name }}</td>
-      <td>{{ customer.age }}</td>
-      <td><img [src]="customer.picture" height="100" width="50"></td>
-    </tr>
-  </tbody>
-</table>
-  
+<div class="customer-page-container">
+    <h2 class="page-title">Danh sách Khách hàng Demo 1</h2>
+    
+    <div class="customer-grid">
+      
+      <div class="customer-card" *ngFor="let cust of customers">
+        
+        <div class="card-header">
+            <img [src]="cust.avatarUrl" [alt]="cust.name" class="avatar-img">
+        </div>
+        
+        <div class="card-body">
+
+            <h3 class="customer-name">{{ cust.name }}</h3>
+            
+            <div class="contact-info">
+                <p><i class="fa fa-envelope"></i> {{ cust.email }}</p>
+                <p><i class="fa fa-phone"></i> {{ cust.phone }}</p>
+            </div>
+        </div>
+
+        <div class="card-footer">
+             <button class="btn-view">Xem chi tiết</button>
+        </div>
+
+      </div>
+      </div>
+  </div>

@@ -1,0 +1,9 @@
+[
+{
+"context": ["/products"],
+"target": "https://api.alternative.me/v1/ticker/",
+"secure": true,
+"changeOrigin":true,
+"logLevel":"debug"
+}
+]
