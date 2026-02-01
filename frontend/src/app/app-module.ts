@@ -17,6 +17,7 @@ import { Books } from './books/books';
 import { Laptops } from './laptops/laptop/laptop'
 import { Form } from './form/form';
 import { Ex26 } from './ex26/ex26';
+import { Ex27 } from './ex27/ex27';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +31,7 @@ import { Ex26 } from './ex26/ex26';
     Laptops,
     Form,
     Ex26,
+    Ex27
   ],
   imports: [
     BrowserModule,

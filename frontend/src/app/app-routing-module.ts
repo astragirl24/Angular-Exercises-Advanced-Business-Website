@@ -8,7 +8,8 @@ import { CustomerHttpGroup } from './customer-http-group/customer-http-group';
 import { Books } from './books/books';
 import { Laptops } from './laptops/laptop/laptop'
 import { Form } from './form/form'
-import { Ex26 } from './ex26/ex26';
+import { Ex26 } from './ex26/ex26'
+import { Ex27 } from './ex27/ex27'
 export const routes: Routes = [
   { path: 'sản-phẩm-1/:id', component: ProductDetail },
   { path: 'product-service-event', component: ProductServiceEvent},
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: 'laptop', component: Laptops},
   { path: 'form', component: Form },
   { path: 'ex26', component: Ex26}, 
+  { path: 'ex27', component: Ex27},
   { path: '**', component: NotFound }
 ];
 
