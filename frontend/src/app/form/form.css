@@ -1,0 +1,64 @@
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.register-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 500px;
+  padding: 40px;
+}
+
+/* 3. TIÊU ĐỀ */
+h3.form-title {
+  color: #4a4a4a;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.form-control, .form-select {
+  height: 55px; 
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding-left: 15px;
+  font-size: 15px;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: yellowgreen; 
+}
+.btn-submit {
+  width: 100%;
+  padding: 15px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 10px;
+  background: blue;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-submit:disabled {
+  background: #ccc; 
+  cursor: not-allowed;
+}
+.error-text {
+  color: #ff4757;
+  font-size: 13px;
+  margin-top: 5px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+.error-text::before {
+  content: "⚠";
+  margin-right: 5px;
+}

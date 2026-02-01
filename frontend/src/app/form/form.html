@@ -1,0 +1,70 @@
+<div class="register-card">
+  <h3 class="form-title">Đăng Ký Khóa Học</h3>
+
+  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)" novalidate>
+
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="Nhập tên"
+        [(ngModel)]="studentModel.name"
+        name="name"
+        #name="ngModel"
+        required
+        [class.is-invalid]="name.invalid && (name.dirty || name.touched)"
+      />
+      <label for="name">Họ và Tên</label> <div class="error-text" *ngIf="name.invalid && (name.dirty || name.touched)">
+        Tên không được để trống
+      </div>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        placeholder="name@example.com"
+        [(ngModel)]="studentModel.email"
+        name="email"
+        #email="ngModel"
+        required
+        email
+        [class.is-invalid]="email.invalid && (email.dirty || email.touched)"
+      />
+      <label for="email">Địa chỉ Email</label>
+
+      <div class="error-text" *ngIf="email.dirty || email.touched">
+        <span *ngIf="email.errors?.['required']">Email là bắt buộc</span>
+        <span *ngIf="email.errors?.['email']">Email không đúng định dạng</span>
+      </div>
+    </div>
+
+    <div class="form-floating mb-4">
+      <select
+        class="form-select"
+        id="course"
+        [(ngModel)]="studentModel.course"
+        name="course"
+        #course="ngModel"
+        required
+        [class.is-invalid]="course.invalid && (course.dirty || course.touched)"
+        (change)="validateCourse(course.value)"
+      >
+        <option value="" disabled selected>Chọn khóa học...</option>
+        <option *ngFor="let c of courses" [value]="c">{{ c }}</option>
+      </select>
+      <label for="course">Bạn muốn học gì?</label>
+
+      <div class="error-text" *ngIf="course.invalid && (course.dirty || course.touched)">
+        Vui lòng chọn một khóa học
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit" [disabled]="userForm.invalid">
+      Gửi Đăng Ký Ngay
+    </button>
+
+  </form>
+</div>

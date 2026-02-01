@@ -1,8 +1,15 @@
-{
-  "/books": {
+[
+  {
+    "context": ["/api"],
     "target": "http://localhost:3000",
     "secure": false,
+    "logLevel": "debug"
+  },
+  {
+    "context": ["/products"],
+    "target": "https://fakestoreapi.com",
+    "secure": true,
     "changeOrigin": true,
     "logLevel": "debug"
   }
-}
+]

@@ -1,18 +1,18 @@
-<p>books works!</p>
+<p>laptop works!</p>
 <div style="padding: 20px;">
-    <h2>BỖNG DƯNG MUỐN KHÓC</h2>
+    <h2>DANH SÁCH LAPTOP LẬU</h2>
     
     <table border="1" style="width: 100%; border-collapse: collapse;">
         <tr style="background-color: #333; color: white;">
-            <th>Mã sách</th>
-            <th>Tên sách</th>
+            <th>Mã máy</th>
+            <th>Tên sản phẩm</th>
             <th>Giá bán</th>
             <th>Hình ảnh</th>
         </tr>
         
-        <tr *ngFor="let p of books">
-            <td>{{ p.BookId }}</td>
-            <td style="color: blue; font-weight: bold;">{{ p.BookName }}</td>
+        <tr *ngFor="let p of laptops">
+            <td>{{ p.Id }}</td>
+            <td style="color: blue; font-weight: bold;">{{ p.Name }}</td>
             <td>{{ p.Price }}$</td>
             <td>
                 <img [src]="p.Image" width="100px">
