@@ -10,17 +10,30 @@ import { Laptops } from './laptops/laptop/laptop'
 import { Form } from './form/form'
 import { Ex26 } from './ex26/ex26'
 import { Ex27 } from './ex27/ex27'
+import { BookDetail } from './book-detail/book-detail';
+import { BookNew } from './book-new/book-new';
+import { BookEdit } from './book-edit/book-edit';
+import { FashionComponent } from './fashion/fashion';
+import { MomoPayment } from './momo-payment/momo-payment';
+import { Login } from './login/login';
 export const routes: Routes = [
   { path: 'sản-phẩm-1/:id', component: ProductDetail },
   { path: 'product-service-event', component: ProductServiceEvent},
   { path: 'product-service-detail/:id', component: ProductServiceDetail}, 
   { path: 'customer-http-group', component: CustomerHttpGroup },
+  { path: 'fashion', component: FashionComponent },
   { path: 'ex39', component: Books},
   { path: 'laptop', component: Laptops},
   { path: 'form', component: Form },
   { path: 'ex26', component: Ex26}, 
   { path: 'ex27', component: Ex27},
-  { path: '**', component: NotFound }
+  { path: 'ex41', component: BookDetail},
+  { path: 'ex41/:id', component: BookDetail},
+  { path: 'books/new', component: BookNew },
+  { path: 'books/edit/:id', component: BookEdit },
+  { path: 'momo', component: MomoPayment },
+  { path: 'login', component: Login },
+  //{ path: '**', component: NotFound }
 ];
 
 @NgModule({

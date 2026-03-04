@@ -1,11 +1,13 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
-//kích hoạt Morgan (xem log) và CORS (cho phép gọi API từ bên ngoài)
 app.use(morgan("combined"));
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/img', express.static('public_image'));
 //database giả lập
 let database = [
@@ -43,14 +45,57 @@ app.get('/', (req, res) => {
 })
 /////////////API LẤY LIST SÁCH//////////////
 app.get('/books', (req, res) => {
-    const baseUrl = `${req.protocol}://${req.get('host')}`; 
-    const booksWithFullImages = database.map(book => {
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
+    const result = database.map(item => {
         return {
-            ...book, 
-            Image: `${baseUrl}/img/${book.Image}` 
+            ...item,
+            Image: `${baseUrl}/img/${item.Image}` 
         };
     });
-    res.json(booksWithFullImages);
+    res.json(result);
+});
+/////////////API LẤY CHI TIẾT SÁCH//////////////
+app.get('/books/:id', (req, res) => {
+    const baseUrl = `${req.protocol}://${req.get('host')}`; 
+    let id = req.params.id;
+    let book = database.find(b => b.BookId == id);
+    if (book) {
+        let bookWithFullImage = {
+            ...book,
+            Image: `${baseUrl}/img/${book.Image}`
+        };
+        res.json(bookWithFullImage);
+    } else {
+        res.json({ "message": "Not found" });
+    }
+});
+/////////////API thêm sách mới//////////////
+app.post('/books', (req, res) => {
+    let book = req.body; 
+    database.push(book); 
+    res.json({ "message": "Thêm thành công", "data": book });
+});
+/////////////API sửa thông tin sách//////////////
+app.put('/books', (req, res) => {
+    let book = req.body;
+    let index = database.findIndex(b => b.BookId == book.BookId);
+    if (index >= 0) {
+        database[index] = book; 
+        res.json({ "message": "Cập nhật thành công", "data": book });
+    } else {
+        res.json({ "message": "Không tìm thấy sách để sửa" });
+    }
+});
+/////////////API xóa sách//////////////
+app.delete('/books/:id', (req, res) => {
+    let id = req.params.id;
+    let index = database.findIndex(b => b.BookId == id);
+    if (index >= 0) {
+        database.splice(index, 1); 
+        res.json({ "message": "Xóa thành công" });
+    } else {
+        res.json({ "message": "Không tìm thấy sách" });
+    }
 });
 /////////////API LẤY LIST LAPTOP//////////////
 app.get('/laptops', (req, res) => {

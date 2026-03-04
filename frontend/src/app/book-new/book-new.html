@@ -1,0 +1,17 @@
+<p>book-new works!</p>
+<div class="container">
+  <h3>THÊM SÁCH MỚI</h3>
+  <div class="mb-3">
+    <label>ID:</label> <input class="form-control" [(ngModel)]="book.BookId">
+  </div>
+  <div class="mb-3">
+    <label>Name:</label> <input class="form-control" [(ngModel)]="book.BookName">
+  </div>
+  <div class="mb-3">
+    <label>Price:</label> <input class="form-control" type="number" [(ngModel)]="book.Price">
+  </div>
+  <div class="mb-3">
+    <label>Image (Tên file):</label> <input class="form-control" [(ngModel)]="book.Image">
+  </div>
+  <button (click)="postBook()" class="btn btn-primary">Lưu</button>
+</div>

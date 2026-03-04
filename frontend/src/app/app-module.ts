@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing-module';
-import { AppComponent } from './app';
+import { App } from './app';
 import { CatalogComponent } from './catalog/catalog';
 import { NotFound } from './not-found/not-found'; 
 import { ListCustomer2 } from './list-customer-2/list-customer-2';
@@ -18,9 +18,16 @@ import { Laptops } from './laptops/laptop/laptop'
 import { Form } from './form/form';
 import { Ex26 } from './ex26/ex26';
 import { Ex27 } from './ex27/ex27';
+import { BookDetail } from './book-detail/book-detail';
+import { BookNew } from './book-new/book-new';
+import { BookEdit } from './book-edit/book-edit';
+import { RouterModule } from '@angular/router';
+import { FashionComponent } from './fashion/fashion';
+import { Login } from './login/login';
+import { MomoPayment } from './momo-payment/momo-payment';
 @NgModule({
   declarations: [
-    AppComponent,
+    App,
     NotFound,
     ListCustomer2,
     ProductDetail,
@@ -31,7 +38,10 @@ import { Ex27 } from './ex27/ex27';
     Laptops,
     Form,
     Ex26,
-    Ex27
+    Ex27,
+    BookDetail,
+    BookNew,
+    BookEdit
   ],
   imports: [
     BrowserModule,
@@ -40,9 +50,12 @@ import { Ex27 } from './ex27/ex27';
     FormsModule,
     ReactiveFormsModule,
     CatalogComponent,
+    RouterModule.forRoot([]),
+    FashionComponent,
+    Login,
+    MomoPayment,
     HttpClientModule
   ],
-  providers: [provideHttpClient()],
-  bootstrap: [AppComponent]
+  bootstrap: [App]
 })
 export class AppModule { }

@@ -15,8 +15,17 @@
             <td style="color: blue; font-weight: bold;">{{ p.BookName }}</td>
             <td>{{ p.Price }}$</td>
             <td>
-                <img [src]="p.Image" width="100px">
+                <img [src]="p.Image" width="100px" (click)="view_detail(p.BookId)">
             </td>
+            <td>
+            <a [routerLink]="['/books/edit', p.BookId]" style="color: blue; margin-right: 10px;">
+                Edit
+            </a>
+
+            <button (click)="deleteBook(p.BookId)" style="color: red; cursor: pointer;">
+                Delete
+            </button>
+        </td>
         </tr>
     </table>
 </div>

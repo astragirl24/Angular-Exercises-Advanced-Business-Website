@@ -1,6 +1,6 @@
 [
   {
-    "context": ["/api"],
+    "context": ["/api", "/books"],
     "target": "http://localhost:3000",
     "secure": false,
     "logLevel": "debug"
@@ -9,6 +9,34 @@
     "context": ["/products"],
     "target": "https://fakestoreapi.com",
     "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  {
+  "context": ["/fashions"],
+  "target": "http://localhost:3002",
+  "secure": true,
+  "changeOrigin": true,
+  "logLevel": "debug"
+},
+{
+    "context": ["/login"],
+    "target": "http://localhost:3002",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  {
+    "context": ["/auth"],
+    "target": "http://localhost:3002",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+{
+    "context": ["/momo"],
+    "target": "http://localhost:3002",
+    "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
   }

@@ -1,53 +1,60 @@
 <link rel="stylesheet" href="app.css">
-
 <div id="container">
-    <ul>
-        <li> <a href="#">HOME</a></li>
+   <ul>
+       <li> <a href="#">HOME</a></li>
 
-        <li> <a href="#">CUSTOMER</a>
-            <ul>
-                <li> <a routerLink="/customer-http-group">List of Customers</a></li>
-            </ul>
-        </li>
 
-        <li> <a href="#">PRODUCTS</a>
-            <ul style="min-width: 250px;"> <li> 
-                    <a>Our Products</a>
-                </li>
+       <li> <a href="#">CUSTOMER</a>
+           <ul>
+               <li> <a routerLink="/customer-http-group">List of Customers</a></li>
+           </ul>
+       </li>
 
-                <li style="border-top: 1px solid rgba(255,255,255,0.3); margin: 5px 0;"></li>
 
-                <li> 
-                    <a routerLink="/product-service-event" style="font-weight: bold;">
-                        Exercise 13
-                    </a>
-                </li>
-                
-            </ul>
-        </li>
+       <li> <a href="#">PRODUCTS</a>
+           <ul style="min-width: 250px;">
+               <li><a>Our Products</a></li>
+               <li style="border-top: 1px solid rgba(255,255,255,0.3); margin: 5px 0;"></li>
+               <li>
+                   <a routerLink="/product-service-event" style="font-weight: bold;">
+                       Exercise 13
+                   </a>
+               </li>
+           </ul>
+       </li>
 
-        <li> <a href="#">FORMS</a>
-            <ul>
-                <li> <a routerLink='/form'>Form</a></li>
-                <li> <a>Reactive Form</a></li>
-            </ul>
-        </li>
-        <li> <a href="#">EXTERNAL API</a>
-            <ul>
-                <li> <a routerLink="/ex26">Exercise 26</a></li>
-                <li> <a routerLink="/ex27">Exercise 27</a></li>
-            </ul>
-        </li>
-        <li> <a href="#">INTERNAL API</a>
-            <ul>
-                <li> <a routerLink="/ex39">Exercise 39</a></li>
-                <li> <a routerLink="/laptop">LAPTOP LẬU</a></li>
-            </ul>
-        </li>
-        <li> <a routerLink="/gioi-thieu">ABOUT</a></li>
-    </ul>
+
+       <li> <a href="#">FORMS</a>
+           <ul>
+               <li> <a routerLink='/form'>Form</a></li>
+               <li> <a>Reactive Form</a></li>
+           </ul>
+       </li>
+
+
+       <li> <a href="#">EXTERNAL API</a>
+           <ul>
+               <li> <a routerLink="/ex26">Exercise 26</a></li>
+               <li> <a routerLink="/ex27">Exercise 27</a></li>
+           </ul>
+       </li>
+
+
+       <li> <a href="#">INTERNAL API</a>
+           <ul>
+               <li> <a routerLink="/ex39">Exercise 39 (Simple List)</a></li>
+               <li> <a routerLink="/ex41">Exercise 41 (Detail Only)</a></li>
+               <li> <a routerLink="/laptop">LAPTOP LẬU</a></li>
+              
+               <li style="border-top: 1px solid white; margin: 5px 0;"></li>
+               <li> <a routerLink="/books/new">Ex 50: Create Book</a></li>
+           </ul>
+       </li>
+       <li> <a routerLink="/gioi-thieu">ABOUT</a></li>
+       <li><a routerLink="/momo">MOMO PAYMENT</a></li>
+   </ul>
 </div>
 
-<div style="margin-top: 20px; padding: 10px; border: 1px dashed #ccc;">
-    <router-outlet></router-outlet>
-</div>
+
+<div style="margin-top: 20px; padding: 20px; border: 1px dashed #ccc; min-height: 300px;">
+<router-outlet></router-outlet>
