@@ -19,6 +19,7 @@ import { Login } from './login/login';
 import { FashionDetailComponent } from './fashion-detail/fashion-detail';
 import { CookieTestComponent } from './cookie-test/cookie-test.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ProductAdminComponent } from './product-admin/product-admin.component';
 
 export const routes: Routes = [
   { path: 'sản-phẩm-1/:id', component: ProductDetail },
@@ -40,6 +41,7 @@ export const routes: Routes = [
   { path: 'fashion-detail/:id', component: FashionDetailComponent },
   { path: 'cookie-test', component: CookieTestComponent },
   { path: 'shopping-cart', component: ShoppingCartComponent },
+  { path: 'product-admin', component: ProductAdminComponent },
   //{ path: '**', component: NotFound }
 ];
 

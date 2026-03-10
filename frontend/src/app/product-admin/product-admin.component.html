@@ -1,0 +1,91 @@
+<div class="container mt-4">
+    <div class="row">
+        <!-- PRODUCT FORM -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">{{ isEditing ? 'Edit Product' : 'Add New Product' }}</h5>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="saveProduct()">
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="currentProduct.name" name="name"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Price ($)</label>
+                            <input type="number" class="form-control" [(ngModel)]="currentProduct.price" name="price"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Image URL</label>
+                            <input type="text" class="form-control" [(ngModel)]="currentProduct.image_url"
+                                name="image_url">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" rows="3" [(ngModel)]="currentProduct.description"
+                                name="description"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn" [ngClass]="isEditing ? 'btn-warning' : 'btn-primary'"
+                            [disabled]="!currentProduct.name || !currentProduct.price">
+                            {{ isEditing ? 'Update Product' : 'Add Product' }}
+                        </button>
+                        <button *ngIf="isEditing" type="button" class="btn btn-secondary ms-2"
+                            (click)="resetForm()">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRODUCT LIST TABLE -->
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Product Directory (Exercise 58)</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let p of products">
+                                    <td>
+                                        <img *ngIf="p.image_url" [src]="p.image_url"
+                                            (error)="p.image_url='https://instagram.fsgn5-11.fna.fbcdn.net/v/t51.82787-15/648983541_17915755722314506_2081207357036279647_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InRocmVhZHMuQ0FST1VTRUxfSVRFTS5pbWFnZV91cmxnZW4uMTE3MHgxMTcwLnNkci5mODI3ODcuZGVmYXVsdF9pbWFnZS5jMiJ9&_nc_ht=instagram.fsgn5-11.fna.fbcdn.net&_nc_cat=110&_nc_oc=Q6cZ2QFg7O6Ho4QgrcShAqb9-3dD7-_puXj8IUeWmc1Rqp4pGz7sM4zJye_fIqW80bMeZjA1gJ0cz2oWUZIK0Vbg9g_K&_nc_ohc=9GwSZF0eUYEQ7kNvwE55-mA&_nc_gid=8mvjg5syWUiScl90a_JGqA&edm=AKr904kBAAAA&ccb=7-5&ig_cache_key=Mzg0OTA5MDc5MDI0MTI4NTY4NQ%3D%3D.3-ccb7-5&oh=00_Afx8dZF-uc_s3AOvmdUet4QETDeXO5qGqqDMW0CmQdTRnw&oe=69B5E277&_nc_sid=23467f'"
+                                            style="width: 100px; height: auto; border-radius: 5px;" alt="Product Image">
+                                        <span *ngIf="!p.image_url" class="text-muted small">No Image</span>
+                                    </td>
+                                    <td class="align-middle fw-semibold">{{ p.name }}</td>
+                                    <td class="align-middle text-success fw-bold">${{ p.price }}</td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-outline-info me-2"
+                                            (click)="editProduct(p)">Edit</button>
+                                        <button class="btn btn-sm btn-outline-danger"
+                                            (click)="deleteProduct(p._id)">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="products.length === 0">
+                                    <td colspan="4" class="text-center text-muted py-4">No products found in the
+                                        database. Please add one!</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

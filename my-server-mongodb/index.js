@@ -43,6 +43,7 @@ fashionCollection = database.collection("Fashion");
 userCollection = database.collection("User");
 onclassDb = client.db("OnClass");
 logginCollection = onclassDb.collection("Loggin");
+productCollection = database.collection("Products"); // Ex 58
 
 // Tạo sample Users trong FashionData nếu chưa có
 async function initSampleUsers() {
@@ -627,4 +628,66 @@ app.post("/cart/remove", (req, res) => {
   }
 
   res.json(req.session.cart || []);
+});
+
+// ============================================================
+// EXERCISE 58: PRODUCTS CRUD API
+// ============================================================
+
+// GET all products
+app.get("/api/products", cors({ origin: 'http://localhost:4200', credentials: true }), async (req, res) => {
+  try {
+    const result = await productCollection.find({}).toArray();
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET single product by id
+app.get("/api/products/:id", cors({ origin: 'http://localhost:4200', credentials: true }), async (req, res) => {
+  try {
+    const result = await productCollection.findOne({ _id: new ObjectId(req.params.id) });
+    if (!result) return res.status(404).json({ error: "Product not found" });
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST create new product
+app.post("/api/products", cors({ origin: 'http://localhost:4200', credentials: true }), async (req, res) => {
+  try {
+    const { name, price, description, image_url } = req.body;
+    const result = await productCollection.insertOne({ name, price, description, image_url });
+    res.status(201).json({ message: "Product created", insertedId: result.insertedId });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT update existing product
+app.put("/api/products/:id", cors({ origin: 'http://localhost:4200', credentials: true }), async (req, res) => {
+  try {
+    const { name, price, description, image_url } = req.body;
+    const result = await productCollection.updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: { name, price, description, image_url } }
+    );
+    if (result.matchedCount === 0) return res.status(404).json({ error: "Product not found" });
+    res.json({ message: "Product updated successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE product
+app.delete("/api/products/:id", cors({ origin: 'http://localhost:4200', credentials: true }), async (req, res) => {
+  try {
+    const result = await productCollection.deleteOne({ _id: new ObjectId(req.params.id) });
+    if (result.deletedCount === 0) return res.status(404).json({ error: "Product not found" });
+    res.json({ message: "Product deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
