@@ -1,57 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common'; 
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // Bắt buộc để dùng ngModel
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './login.html',
-  styleUrls: ['./login.css'],
+  templateUrl: './login.html'
 })
 export class Login implements OnInit {
-  username: string = '';
-  password: string = '';
-  errorMessage: string = '';
-  isLoading: boolean = false;
+  username = '';
+  password = '';
 
-  constructor(
-    private _http: HttpClient,
-    private _router: Router,
-  ) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    // Đọc cookie khi mở trang, tự điền vào form
-    this.username = this.getCookie('username');
-    this.password = this.getCookie('password');
-  }
-
-  getCookie(name: string): string {
+    // Đoạn code AI viết để đọc cookie (giữ nguyên nếu có)
     const cookies = document.cookie.split(';');
-    for (let cookie of cookies) {
-      const [key, value] = cookie.trim().split('=');
-      if (key === name) return decodeURIComponent(value || '');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.startsWith('username=')) {
+        this.username = cookie.substring('username='.length);
+      }
+      if (cookie.startsWith('password=')) {
+        this.password = cookie.substring('password='.length);
+      }
     }
-    return '';
   }
 
-  onSubmit() {
-    this.errorMessage = '';
-    this.isLoading = true;
+  // 👇 ĐÂY CHÍNH LÀ HÀM BỊ THIẾU, COPY VÀO NHÉ 👇
+  login() {
     const body = { username: this.username, password: this.password };
-    this._http.post<any>('/auth/login', body, { withCredentials: true }).subscribe({
-      next: (res) => {
-        this.isLoading = false;
-        if (res.success) {
-          this._router.navigate(['/ex53']);
+
+    // Gọi API sang backend port 3002
+    this.http.post('http://localhost:3002/auth/login', body, { withCredentials: true })
+      .subscribe({
+        next: (res: any) => {
+          alert('Đăng nhập thành công! F5 lại trang để xem Cookie tự điền nhé.');
+          console.log(res);
+        },
+        error: (err) => {
+          alert('Đăng nhập thất bại: Sai tài khoản hoặc mật khẩu!');
+          console.error(err);
         }
-      },
-      error: (err) => {
-        this.isLoading = false;
-        this.errorMessage = err.error?.message || 'Tài khoản hoặc mật khẩu không đúng!';
-      },
-    });
+      });
   }
 }

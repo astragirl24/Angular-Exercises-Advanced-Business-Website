@@ -25,6 +25,7 @@ import { RouterModule } from '@angular/router';
 import { FashionComponent } from './fashion/fashion';
 import { Login } from './login/login';
 import { MomoPayment } from './momo-payment/momo-payment';
+import { FashionDetailComponent } from './fashion-detail/fashion-detail';
 @NgModule({
   declarations: [
     App,
@@ -50,10 +51,10 @@ import { MomoPayment } from './momo-payment/momo-payment';
     FormsModule,
     ReactiveFormsModule,
     CatalogComponent,
-    RouterModule.forRoot([]),
     FashionComponent,
     Login,
     MomoPayment,
+    FashionDetailComponent,
     HttpClientModule
   ],
   bootstrap: [App]

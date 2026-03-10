@@ -1,0 +1,13 @@
+<div class="container" *ngIf="fashion" style="padding: 20px;">
+  <button (click)="goBack()" class="btn btn-secondary"> Quay lại</button>
+  <hr>
+  <div style="display: flex; gap: 30px;">
+    <img [src]="fashion.fashion_image" style="width: 300px; border-radius: 10px; border: 1px solid #ddd;">
+    <div>
+      <h2 style="color: #d63384;">{{ fashion.fashion_subject }}</h2>
+      <p><strong>Phong cách:</strong> {{ fashion.style }}</p>
+      <p><strong>Mô tả chi tiết:</strong></p>
+      <p style="line-height: 1.6;">{{ fashion.fashion_detail }}</p>
+    </div>
+  </div>
+</div>

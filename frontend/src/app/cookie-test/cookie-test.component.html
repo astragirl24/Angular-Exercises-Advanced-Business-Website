@@ -1,0 +1,20 @@
+<div class="container mt-4">
+  <div class="card" style="width: 32rem;">
+    <div class="card-header bg-primary text-white">
+      Exercise 60: Cookies Programming
+    </div>
+    <div class="card-body">
+      <div class="d-flex flex-wrap gap-2 mb-3">
+        <button class="btn btn-outline-primary" (click)="createCookie()">Initialize Cookie object</button>
+        <button class="btn btn-outline-info" (click)="readCookie()">Retrieve Cookies</button>
+        <button class="btn btn-outline-warning" (click)="createLimitedCookie()">Initialize Limited Cookie</button>
+        <button class="btn btn-outline-danger" (click)="clearCookie()">Delete Cookies</button>
+      </div>
+
+      <div class="alert alert-secondary mb-0" *ngIf="result">
+        <strong>Result:</strong><br>
+        <span [innerHTML]="result"></span>
+      </div>
+    </div>
+  </div>
+</div>

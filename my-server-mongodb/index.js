@@ -2,22 +2,25 @@ const express = require('express');
 const app = express();
 const port = 3002;
 
-const morgan=require("morgan");
+const morgan = require("morgan");
 app.use(morgan("combined"));
 
-const bodyParser=require("body-parser");
+const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-const cors=require("cors");
-app.use(cors());
+const cors = require("cors");
+app.use(cors({
+  origin: ['http://localhost:4200', 'http://localhost:56241'],
+  credentials: true
+}));
 
-app.listen(port, ()=>{
-    console.log(`My Server listening on port ${port}`)
+app.listen(port, () => {
+  console.log(`My Server listening on port ${port}`)
 });
 
-app.get("/", (req, res)=>{
-    res.send("This Web server is processed for MongoDB")
+app.get("/", (req, res) => {
+  res.send("This Web server is processed for MongoDB")
 });
 
 const { MongoClient, ObjectId } = require('mongodb');
@@ -141,7 +144,7 @@ app.delete("/fashions/:id", cors(), async (req, res) => {
 // POST /auth/login - Đăng nhập, lưu Cookie
 app.post(
   "/auth/login",
-  cors({ origin: true, credentials: true }),
+  cors({ origin: 'http://localhost:4200', credentials: true }),
   async (req, res) => {
     try {
       if (!req.body)
@@ -329,14 +332,14 @@ app.delete("/loggin/:username", cors(), async (req, res) => {
 var cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
-app.get("/create-cookie", cors(), (req, res) => {
+app.get("/create-cookie", cors({ origin: 'http://localhost:4200', credentials: true }), (req, res) => {
   res.cookie("username", "tranduythanh");
   res.cookie("password", "123456");
   account = { username: "tranduythanh", password: "123456" };
   res.cookie("account", account);
   res.send("cookies are created");
 });
-app.get("/read-cookie", cors(), (req, res) => {
+app.get("/read-cookie", cors({ origin: 'http://localhost:4200', credentials: true }), (req, res) => {
   //cookie is stored in client, so we use req
   username = req.cookies.username;
   password = req.cookies.password;
@@ -349,7 +352,7 @@ app.get("/read-cookie", cors(), (req, res) => {
   }
   res.send(infor);
 });
-app.get("/create-limited-cookie", cors(), (req, res) => {
+app.get("/create-limited-cookie", cors({ origin: 'http://localhost:4200', credentials: true }), (req, res) => {
   //Expires after 360000 ms from the time it is set.
   res.cookie("infor_limit1", "I am limited Cookie - way 1", {
     expires: new Date(Date.now() + 360000),
@@ -357,7 +360,7 @@ app.get("/create-limited-cookie", cors(), (req, res) => {
   res.cookie("infor_limit2", "I am limited Cookie - way 2", { maxAge: 360000 });
   res.send("Limited cookies are created");
 });
-app.get("/clear-cookie", cors(), (req, res) => {
+app.get("/clear-cookie", cors({ origin: 'http://localhost:4200', credentials: true }), (req, res) => {
   res.clearCookie("account");
   res.send("[account] Cookie is removed");
 });
@@ -516,4 +519,22 @@ app.get("/momo/return", cors(), (req, res) => {
     orderInfo,
     success: resultCode === "0",
   });
+});
+app.get("/fashions/:id", cors(), async (req, res) => {
+  var o_id = new ObjectId(req.params["id"]);
+  const result = await fashionCollection.find({ _id: o_id }).toArray();
+  res.send(result[0])
+}
+);
+// Đoạn này đã có trong file index.js của bạn
+app.get("/fashions/:id", cors(), async (req, res) => {
+  try {
+    const result = await fashionCollection.findOne({
+      _id: new ObjectId(req.params.id),
+    });
+    if (!result) return res.status(404).json({ error: "Not found" });
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
