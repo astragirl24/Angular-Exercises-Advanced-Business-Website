@@ -18,6 +18,7 @@ import { MomoPayment } from './momo-payment/momo-payment';
 import { Login } from './login/login';
 import { FashionDetailComponent } from './fashion-detail/fashion-detail';
 import { CookieTestComponent } from './cookie-test/cookie-test.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 export const routes: Routes = [
   { path: 'sản-phẩm-1/:id', component: ProductDetail },
@@ -38,6 +39,7 @@ export const routes: Routes = [
   { path: 'dang-nhap', component: Login },
   { path: 'fashion-detail/:id', component: FashionDetailComponent },
   { path: 'cookie-test', component: CookieTestComponent },
+  { path: 'shopping-cart', component: ShoppingCartComponent },
   //{ path: '**', component: NotFound }
 ];
 

@@ -15,6 +15,18 @@ app.use(cors({
   credentials: true
 }));
 
+const session = require('express-session');
+app.use(session({
+  secret: 'mysecret',
+  resave: true, // Changed to true based on prompt
+  saveUninitialized: true,
+  cookie: {
+    secure: false, // Must be false for localhost without HTTPS
+    httpOnly: true, // Recommended for security
+    sameSite: 'lax' // Recommended for localhost CORS
+  }
+}));
+
 app.listen(port, () => {
   console.log(`My Server listening on port ${port}`)
 });
@@ -537,4 +549,82 @@ app.get("/fashions/:id", cors(), async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+});
+
+// ============================================================
+// EXERCISE 62 & 63: SESSION PROGRAMMING & SHOPPING CART
+// ============================================================
+
+// Ex 62: Session Visit Counter
+app.get("/contact", (req, res) => {
+  if (req.session.visited) {
+    req.session.visited++;
+    res.json({ message: `You visited this page ${req.session.visited} times` });
+  } else {
+    req.session.visited = 1;
+    res.json({ message: "Welcome to this page for the first time!" });
+  }
+});
+
+// Ex 63: Mock Products for the Shopping Cart
+const MOCK_PRODUCTS = [
+  { id: 1, name: "Diamond Promise Ring 1/6 ct tw White Gold", price: 399.99, image: "https://truongan9.github.io/Hinh/1.jpg" },
+  { id: 2, name: "Diamond Promise Ring 1/4 ct tw Round/Baguette", price: 529.00, image: "https://truongan9.github.io/Hinh/2.jpg" },
+  { id: 3, name: "Diamond Promise Ring 1/6 ct tw Black/White Silver", price: 159.00, image: "https://truongan9.github.io/Hinh/3.jpg" }
+];
+
+app.get("/products", (req, res) => {
+  res.json(MOCK_PRODUCTS);
+});
+
+// Ex 63: View Cart
+app.get("/cart/view", (req, res) => {
+  if (!req.session.cart) {
+    req.session.cart = [];
+  }
+  res.json(req.session.cart);
+});
+
+// Ex 63: Add to Cart
+app.post("/cart/add", (req, res) => {
+  const product = req.body;
+
+  if (!req.session.cart) {
+    req.session.cart = [];
+  }
+
+  const existingItemIndex = req.session.cart.findIndex(item => item.id === product.id);
+
+  if (existingItemIndex > -1) {
+    req.session.cart[existingItemIndex].quantity += 1;
+  } else {
+    req.session.cart.push({ ...product, quantity: 1 });
+  }
+
+  res.json(req.session.cart);
+});
+
+// Ex 63: Update Cart Quantity
+app.post("/cart/update", (req, res) => {
+  const { productId, quantity } = req.body;
+
+  if (req.session.cart) {
+    const item = req.session.cart.find(item => item.id === productId);
+    if (item) {
+      item.quantity = Math.max(1, quantity); // Ensure quantity is at least 1
+    }
+  }
+
+  res.json(req.session.cart || []);
+});
+
+// Ex 63: Remove from Cart
+app.post("/cart/remove", (req, res) => {
+  const { productId } = req.body;
+
+  if (req.session.cart) {
+    req.session.cart = req.session.cart.filter(item => item.id !== productId);
+  }
+
+  res.json(req.session.cart || []);
 });
